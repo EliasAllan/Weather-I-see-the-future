@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../upenn-fs-repo"
+		},
+		{
+			"path": "../Coding-test-module-4-homework-"
+		},
+		{
+			"path": "../upenn-project-1"
+		},
+		{
+			"path": "../Calendar-Challenge-Module-5"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Weather-I-see-the-future"
+	}
+}
