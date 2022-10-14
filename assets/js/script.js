@@ -1,6 +1,6 @@
-var requestUrl = 'https://api.openweathermap.org/data/3.0/onecall?lat=39.7445&lon=-77.0880&appid=338ceedf83a992ffd42dcc24175384c9';
-// 39.7445
-// -77.0880
+var requestUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=Hanover,PA,US&appid=338ceedf83a992ffd42dcc24175384c9';
+// 338ceedf83a992ffd42dcc24175384c9
+// '+'#city'+'#state'+'#country'+'
 fetch(requestUrl)
   .then(function (response) {
     return response.json();
