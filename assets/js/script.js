@@ -2,6 +2,7 @@ var requestUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=Hanover,PA,
 var cityName = document.getElementById("city");
 var stateCode = document.getElementById("state");
 var countryCode = document.getElementById("country");
+var getForecast = document.querySelector("#getForecast")
 // 338ceedf83a992ffd42dcc24175384c9
 // '+'#city'+'#state'+'#country'+'
 
@@ -16,7 +17,7 @@ function getPlace(){
   console.log(cityName.value, stateCode.value , countryCode.value)
 }
 
-
+function fetchAPI (){
 fetch(requestUrl)
   .then(function (response) {
     return response.json();
@@ -30,5 +31,7 @@ fetch(requestUrl)
     // TODO: Loop through the response
     // TODO: Console log each issue's URL and each user's login
   });
-  
+}  
   getPlace()
+
+getForecast.addEventListener("click", fetchAPI)
