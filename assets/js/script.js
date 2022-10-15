@@ -1,8 +1,10 @@
-var requestUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=Hanover,PA,US&appid=338ceedf83a992ffd42dcc24175384c9';
+var requestUrl = 'https://api.openweathermap.org/data/2.5/forecast?q='+'getPlace'+'&appid=338ceedf83a992ffd42dcc24175384c9';
+console.log
 var cityName = document.getElementById("city");
 var stateCode = document.getElementById("state");
 var countryCode = document.getElementById("country");
 var getForecast = document.querySelector("#getForecast")
+
 // 338ceedf83a992ffd42dcc24175384c9
 // '+'#city'+'#state'+'#country'+'
 
@@ -14,7 +16,8 @@ function getPlace(){
   city = cityName.value;
   state = stateCode.value;
   country = countryCode.value;
-  console.log(cityName.value, stateCode.value , countryCode.value)
+  console.log(cityName.value + ',' + stateCode.value + ',' + countryCode.value)
+  
 }
 
 function fetchAPI (){
