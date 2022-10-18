@@ -5,6 +5,7 @@ var countryCode = document.getElementById("country");
 var getForecast = document.querySelector("#getForecast")
 
 // create
+var currentWeatherEl = document.createElement(div);
 
 
 // modify
@@ -17,20 +18,21 @@ var getForecast = document.querySelector("#getForecast")
 // state = '';
 // country = '';
 
-function getPlace(city, state, country){
+function getPlace(city){
   // city = cityName.value;
   // state = stateCode.value;
   // country = countryCode.value;
   // console.log(cityName.value + ',' + stateCode.value + ',' + countryCode.value)
   // console.log(city, state, country)
-  return city + ',' + state + ',' + country;
+  return city;
 }
 
 function fetchAPI (){
   var cityText = cityName.value;
-  var stateText = stateCode.value;
-  var countryText = countryCode.value;
-var requestUrl = 'https://api.openweathermap.org/data/2.5/forecast?q='+ getPlace(cityText, stateText, countryText) +'&appid=338ceedf83a992ffd42dcc24175384c9';
+  // var stateText = stateCode.value;
+  // var countryText = countryCode.value;
+  var requestUrl = 'https://api.openweathermap.org/data/2.5/forecast?q='+ getPlace(cityText) +'&appid=338ceedf83a992ffd42dcc24175384c9'
+  // var placeholder = 'https://api.openweathermap.org/data/2.5/forecast?q='+ getPlace(cityText, stateText, countryText) +'&appid=338ceedf83a992ffd42dcc24175384c9';
 // var requestUrl = 'https://api.openweathermap.org/data/2.5/forecast?q='+ city + ',' + state + ',' + country + '&appid=338ceedf83a992ffd42dcc24175384c9';
 // var requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city},${state},${country}&appid=338ceedf83a992ffd42dcc24175384c9`;
 fetch(requestUrl)
