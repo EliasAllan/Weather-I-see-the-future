@@ -3,6 +3,7 @@ var cityName = document.getElementById("city");
 var stateCode = document.getElementById("state");
 var countryCode = document.getElementById("country");
 var getForecast = document.querySelector("#getForecast");
+var currentForecastEl = document.querySelector('#currentForecast')
 
 
 
@@ -63,14 +64,11 @@ function fetchAPI() {
       var currentWindEl = document.createElement("p");
       var currentHumidityEl = document.createElement("p");
       // modify
-      cityNameEl.textContent = data.city.name
-      currentTempEl.textContent = "Temp: " + ((data.list[0].main.temp - 273.15)* 1.8 )+32 ;
+      cityNameEl.textContent = data.city.name + ' ' + (data.list[0].weather[0].icon) 
+      currentTempEl.textContent = "Temp: " + Math.floor((data.list[0].main.temp - 273.15)* 1.8 +32) + "°F";
       currentWindEl.textContent = "Wind: " + data.list[0].wind.speed + " MPH";
       currentHumidityEl.textContent = "Humidity: " + data.list[0].main.humidity + "%";
-
-      
-
-      // currentWeatherEl.textContent = data.city.name;
+      // currentForecastEl.setAttribute()
       cityNameEl.setAttribute('style', 'font-size:25px')
       currentTempEl.setAttribute('style', 'font-size:25px')
       currentWindEl.setAttribute('style', 'font-size:25px')
@@ -80,7 +78,7 @@ function fetchAPI() {
       document.body.children[1].children[1].appendChild(currentTempEl);
       document.body.children[1].children[1].appendChild(currentWindEl);
       document.body.children[1].children[1].appendChild(currentHumidityEl);
-      
+
       console.log(currentTempEl, currentWindEl , currentHumidityEl)
     });
 }
