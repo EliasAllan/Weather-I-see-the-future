@@ -88,15 +88,10 @@ function fetchAPI(cityParam) {
       var currentWindEl = document.createElement("p");
       var currentHumidityEl = document.createElement("p");
       // modify
-      cityNameEl.textContent =
-      data.city.name + " " + data.list[0].weather[0].icon;
-      currentTempEl.textContent =
-      "Temp: " +
-        Math.floor((data.list[0].main.temp - 273.15) * 1.8 + 32) +
-        "°F";
+      cityNameEl.textContent = data.city.name 
+      currentTempEl.textContent = "Temp: " + Math.floor((data.list[0].main.temp - 273.15) * 1.8 + 32) + "°F";
       currentWindEl.textContent = "Wind: " + data.list[0].wind.speed + " MPH";
-      currentHumidityEl.textContent =
-        "Humidity: " + data.list[0].main.humidity + "%";
+      currentHumidityEl.textContent = "Humidity: " + data.list[0].main.humidity + "%";
         // currentForecastEl.setAttribute()
       // savedCityEl.classList.add("mt-3");
       cityNameEl.setAttribute("style", "font-size:25px");
@@ -106,8 +101,8 @@ function fetchAPI(cityParam) {
       iconEl = document.createElement('img')
       iconLink = "http://openweathermap.org/img/w/" + data.list[0].weather[0].icon + ".png";
       iconEl.setAttribute("src", iconLink)
-console.log(iconEl)
-document.body.append(iconEl)
+      console.log(iconEl)
+      document.body.children[1].children[1].append(iconEl)
       // append
       // searchContainer.appendChild(savedCityEl);
       document.body.children[1].children[1].appendChild(cityNameEl);
