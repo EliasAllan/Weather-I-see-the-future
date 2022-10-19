@@ -59,25 +59,31 @@ function fetchAPI() {
       // TODO: Loop through the response
       // TODO: Console log each issue's URL and each user's login
       //create
+      var savedCityEl = document.createElement("button")
       var cityNameEl = document.createElement("p")
       var currentTempEl = document.createElement("p");
       var currentWindEl = document.createElement("p");
       var currentHumidityEl = document.createElement("p");
       // modify
+      savedCityEl.textContent = localStorage.getItem("City Name")
       cityNameEl.textContent = data.city.name + ' ' + (data.list[0].weather[0].icon) 
       currentTempEl.textContent = "Temp: " + Math.floor((data.list[0].main.temp - 273.15)* 1.8 +32) + "°F";
       currentWindEl.textContent = "Wind: " + data.list[0].wind.speed + " MPH";
       currentHumidityEl.textContent = "Humidity: " + data.list[0].main.humidity + "%";
       // currentForecastEl.setAttribute()
+      savedCityEl.classList.add('mt-3')
       cityNameEl.setAttribute('style', 'font-size:25px')
       currentTempEl.setAttribute('style', 'font-size:25px')
       currentWindEl.setAttribute('style', 'font-size:25px')
       currentHumidityEl.setAttribute('style', 'font-size:25px')
-      // append
+      // append 
+      searchContainer.appendChild(savedCityEl);
       document.body.children[1].children[1].appendChild(cityNameEl);
       document.body.children[1].children[1].appendChild(currentTempEl);
       document.body.children[1].children[1].appendChild(currentWindEl);
       document.body.children[1].children[1].appendChild(currentHumidityEl);
+
+      localStorage.setItem("City Name", data.city.name)
 
       console.log(currentTempEl, currentWindEl , currentHumidityEl)
     });
