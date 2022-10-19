@@ -1,12 +1,28 @@
-console.log;
-var cityName = document.getElementById("city");
-var stateCode = document.getElementById("state");
-var countryCode = document.getElementById("country");
-var getForecast = document.querySelector("#getForecast");
-var currentForecastEl = document.querySelector('#currentForecast')
+function saveToStorage(name) {
+  var cityNameArray = JSON.parse(localStorage.getItem("City Name")) || [];
+  if (cityNameArray.includes(name)) {
+    return;
+  }
+  if (cityNameArray.length > 4) {
+    cityNameArray.shift();
+  }
+  cityNameArray.push(name);
+  localStorage.setItem("City Name", JSON.stringify(cityNameArray));
+  renderStorage();
+}
 
-
-
+function renderStorage() {
+  var cityNameArray = JSON.parse(localStorage.getItem("City Name"));
+  console.log(cityNameArray);
+  document.getElementById("history").innerHTML = "";
+  for (var i = 0; i < cityNameArray?.length ; i++) {
+    var savedCityEl = document.createElement("button");
+    savedCityEl.innerHTML = cityNameArray[i];
+    document.getElementById("history").append(savedCityEl);
+    savedCityEl.addEventListener("click", getValue)
+  }
+}
+renderStorage();
 // create
 // var currentWeatherEl = document.createElement("div");
 
@@ -25,25 +41,29 @@ var currentForecastEl = document.querySelector('#currentForecast')
 // state = '';
 // country = '';
 
-function getPlace(cityChoice) {
-  // city = cityName.value;
-  // state = stateCode.value;
-  // country = countryCode.value;
-  // console.log(cityName.value + ',' + stateCode.value + ',' + countryCode.value)
-  // console.log(city, state, country)
-  return cityChoice;
+function getValue(event) {
+  event.preventDefault()
+  if(event.target.id === "getForecast"){
+    var cityName = document.getElementById("city");
+    if(!cityName.value){
+      return
+    }
+    fetchAPI(cityName.value)
+    saveToStorage(cityName.value)
+    return
+  }
+  fetchAPI(event.target.innerHTML)
 }
 
-function fetchAPI() {
-  var cityText = cityName.value;
+function fetchAPI(cityParam) {
   // var stateText = stateCode.value;
   // var countryText = countryCode.value;
   var requestUrl =
     "https://api.openweathermap.org/data/2.5/forecast?q=" +
-    getPlace(cityText) +
+    cityParam +
     "&appid=338ceedf83a992ffd42dcc24175384c9";
-  // var placeholder = 'https://api.openweathermap.org/data/2.5/forecast?q='+ getPlace(cityText, stateText, countryText) +'&appid=338ceedf83a992ffd42dcc24175384c9';
-  // var requestUrl = 'https://api.openweathermap.org/data/2.5/forecast?q='+ city + ',' + state + ',' + country + '&appid=338ceedf83a992ffd42dcc24175384c9';
+    // var placeholder = 'https://api.openweathermap.org/data/2.5/forecast?q='+ getPlace(cityText, stateText, countryText) +'&appid=338ceedf83a992ffd42dcc24175384c9';
+    // var requestUrl = 'https://api.openweathermap.org/data/2.5/forecast?q='+ city + ',' + state + ',' + country + '&appid=338ceedf83a992ffd42dcc24175384c9';
   // var requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city},${state},${country}&appid=338ceedf83a992ffd42dcc24175384c9`;
   fetch(requestUrl)
     .then(function (response) {
@@ -54,44 +74,52 @@ function fetchAPI() {
       console.log(data);
       for (var i = 0; i < data.length; i++) {
         // console.log("url: " + data[i].url + " login: " + data[i].user.login)
+        console.log(data[i]);
       }
-      console.log(data[i]);
       // TODO: Loop through the response
       // TODO: Console log each issue's URL and each user's login
       //create
+      var currentForecastEl = document.querySelector("#currentForecast");
+      currentForecastEl.innerHTML = "";
 
-      var savedCityEl = document.createElement("button")
-      var cityNameEl = document.createElement("p")
+      // var savedCityEl = document.createElement("button");
+      var cityNameEl = document.createElement("p");
       var currentTempEl = document.createElement("p");
       var currentWindEl = document.createElement("p");
       var currentHumidityEl = document.createElement("p");
       // modify
-      currentForecastEl.innerHTML = '';
-      cityNameEl.textContent = data.city.name + ' ' + (data.list[0].weather[0].icon) 
-      currentTempEl.textContent = "Temp: " + Math.floor((data.list[0].main.temp - 273.15)* 1.8 +32) + "°F";
+      cityNameEl.textContent =
+      data.city.name + " " + data.list[0].weather[0].icon;
+      currentTempEl.textContent =
+      "Temp: " +
+        Math.floor((data.list[0].main.temp - 273.15) * 1.8 + 32) +
+        "°F";
       currentWindEl.textContent = "Wind: " + data.list[0].wind.speed + " MPH";
-      currentHumidityEl.textContent = "Humidity: " + data.list[0].main.humidity + "%";
-      // currentForecastEl.setAttribute()
-      savedCityEl.classList.add('mt-3')
-      cityNameEl.setAttribute('style', 'font-size:25px')
-      currentTempEl.setAttribute('style', 'font-size:25px')
-      currentWindEl.setAttribute('style', 'font-size:25px')
-      currentHumidityEl.setAttribute('style', 'font-size:25px')
-      // append 
-      searchContainer.appendChild(savedCityEl);
+      currentHumidityEl.textContent =
+        "Humidity: " + data.list[0].main.humidity + "%";
+        // currentForecastEl.setAttribute()
+      // savedCityEl.classList.add("mt-3");
+      cityNameEl.setAttribute("style", "font-size:25px");
+      currentTempEl.setAttribute("style", "font-size:25px");
+      currentWindEl.setAttribute("style", "font-size:25px");
+      currentHumidityEl.setAttribute("style", "font-size:25px");
+      iconEl = document.createElement('img')
+      iconLink = "http://openweathermap.org/img/w/" + data.list[0].weather[0].icon + ".png";
+      iconEl.setAttribute("src", iconLink)
+console.log(iconEl)
+document.body.append(iconEl)
+      // append
+      // searchContainer.appendChild(savedCityEl);
       document.body.children[1].children[1].appendChild(cityNameEl);
       document.body.children[1].children[1].appendChild(currentTempEl);
       document.body.children[1].children[1].appendChild(currentWindEl);
       document.body.children[1].children[1].appendChild(currentHumidityEl);
       
       // Store City Names to local storage
-      var cityNameArray = [];
-      cityNameArray.push(data.city.name)
-      localStorage.setItem("City Name", JSON.stringify(cityNameArray))
-      savedCityEl.textContent = JSON.parse(localStorage.getItem("City Name"))
-      console.log(currentTempEl, currentWindEl , currentHumidityEl)
+      console.log(currentTempEl, currentWindEl, currentHumidityEl);
     });
 }
-getPlace();
+// getPlace();
 
-getForecast.addEventListener("click", fetchAPI);
+var getForecast = document.querySelector("#getForecast");
+getForecast.addEventListener("click", getValue);
