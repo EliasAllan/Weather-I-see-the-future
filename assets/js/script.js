@@ -60,7 +60,7 @@ function fetchAPI() {
 
       var currentWeatherEl = document.createElement("p");
       // modify
-      currentWeatherEl.textContent = data.city.coord;
+      currentWeatherEl.textContent = JSON.stringify(data.city.coord);
       // append
       document.body.children[1].appendChild(currentWeatherEl);
       console.log(currentWeatherEl)
