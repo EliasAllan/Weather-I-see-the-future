@@ -59,13 +59,14 @@ function fetchAPI() {
       // TODO: Loop through the response
       // TODO: Console log each issue's URL and each user's login
       //create
+
       var savedCityEl = document.createElement("button")
       var cityNameEl = document.createElement("p")
       var currentTempEl = document.createElement("p");
       var currentWindEl = document.createElement("p");
       var currentHumidityEl = document.createElement("p");
       // modify
-      savedCityEl.textContent = localStorage.getItem("City Name")
+      currentForecastEl.innerHTML = '';
       cityNameEl.textContent = data.city.name + ' ' + (data.list[0].weather[0].icon) 
       currentTempEl.textContent = "Temp: " + Math.floor((data.list[0].main.temp - 273.15)* 1.8 +32) + "°F";
       currentWindEl.textContent = "Wind: " + data.list[0].wind.speed + " MPH";
@@ -82,9 +83,12 @@ function fetchAPI() {
       document.body.children[1].children[1].appendChild(currentTempEl);
       document.body.children[1].children[1].appendChild(currentWindEl);
       document.body.children[1].children[1].appendChild(currentHumidityEl);
-
-      localStorage.setItem("City Name", data.city.name)
-
+      
+      // Store City Names to local storage
+      var cityNameArray = [];
+      cityNameArray.push(data.city.name)
+      localStorage.setItem("City Name", JSON.stringify(cityNameArray))
+      savedCityEl.textContent = JSON.parse(localStorage.getItem("City Name"))
       console.log(currentTempEl, currentWindEl , currentHumidityEl)
     });
 }

@@ -17,4 +17,8 @@ header{
     display:flex;
 }
 
-
+#history{
+display: flex;
+align-items: center;
+flex-direction: column-reverse;
+}
