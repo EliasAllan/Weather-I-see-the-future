@@ -57,14 +57,31 @@ function fetchAPI() {
       console.log(data[i]);
       // TODO: Loop through the response
       // TODO: Console log each issue's URL and each user's login
-
-      var currentWeatherEl = document.createElement("p");
+      //create
+      var cityNameEl = document.createElement("p")
+      var currentTempEl = document.createElement("p");
+      var currentWindEl = document.createElement("p");
+      var currentHumidityEl = document.createElement("p");
       // modify
-      currentWeatherEl.textContent = data.city.name;
-      currentWeatherEl.setAttribute('style', 'font-size:25px')
+      cityNameEl.textContent = data.city.name
+      currentTempEl.textContent = "Temp: " + ((data.list[0].main.temp - 273.15)* 1.8 )+32 ;
+      currentWindEl.textContent = "Wind: " + data.list[0].wind.speed + " MPH";
+      currentHumidityEl.textContent = "Humidity: " + data.list[0].main.humidity + "%";
+
+      
+
+      // currentWeatherEl.textContent = data.city.name;
+      cityNameEl.setAttribute('style', 'font-size:25px')
+      currentTempEl.setAttribute('style', 'font-size:25px')
+      currentWindEl.setAttribute('style', 'font-size:25px')
+      currentHumidityEl.setAttribute('style', 'font-size:25px')
       // append
-      document.body.children[1].appendChild(currentWeatherEl);
-      console.log(currentWeatherEl)
+      document.body.children[1].children[1].appendChild(cityNameEl);
+      document.body.children[1].children[1].appendChild(currentTempEl);
+      document.body.children[1].children[1].appendChild(currentWindEl);
+      document.body.children[1].children[1].appendChild(currentHumidityEl);
+      
+      console.log(currentTempEl, currentWindEl , currentHumidityEl)
     });
 }
 getPlace();
