@@ -82,20 +82,25 @@ function fetchAPI(cityParam) {
       var currentForecastEl = document.querySelector("#currentForecast");
       currentForecastEl.innerHTML = "";
 
-      // var savedCityEl = document.createElement("button");
+      // create
+      var fiveDayForeDay1 = document.createElement("p")
       var cityNameEl = document.createElement("p");
       var currentTempEl = document.createElement("p");
       var currentWindEl = document.createElement("p");
       var currentHumidityEl = document.createElement("p");
       // modify
+      fiveDayForeDay1.textContent = "asdas" 
       cityNameEl.textContent = data.city.name 
       currentTempEl.textContent = "Temp: " + Math.floor((data.list[0].main.temp - 273.15) * 1.8 + 32) + "°F";
       currentWindEl.textContent = "Wind: " + data.list[0].wind.speed + " MPH";
       currentHumidityEl.textContent = "Humidity: " + data.list[0].main.humidity + "%";
-        // currentForecastEl.setAttribute()
-      // savedCityEl.classList.add("mt-3");
+      fiveDayForeDay1.textContent = "Temp: " + Math.floor((data.list[0].main.temp - 273.15) * 1.8 + 32) + "°F";
+      currentWindEl.textContent = "Wind: " + data.list[0].wind.speed + " MPH";
+      currentHumidityEl.textContent = "Humidity: " + data.list[0].main.humidity + "%";
+     
       cityNameEl.setAttribute("style", "font-size:25px");
       currentTempEl.setAttribute("style", "font-size:25px");
+      fiveDayForeDay1.setAttribute("style", "margin-left:265px");
       currentWindEl.setAttribute("style", "font-size:25px");
       currentHumidityEl.setAttribute("style", "font-size:25px");
       iconEl = document.createElement('img')
@@ -105,12 +110,13 @@ function fetchAPI(cityParam) {
       document.body.children[1].children[1].append(iconEl)
       // append
       // searchContainer.appendChild(savedCityEl);
+      document.body.appendChild(fiveDayForeDay1);
       document.body.children[1].children[1].appendChild(cityNameEl);
       document.body.children[1].children[1].appendChild(currentTempEl);
       document.body.children[1].children[1].appendChild(currentWindEl);
       document.body.children[1].children[1].appendChild(currentHumidityEl);
       
-      // Store City Names to local storage
+      
       console.log(currentTempEl, currentWindEl, currentHumidityEl);
     });
 }
