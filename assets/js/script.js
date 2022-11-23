@@ -83,26 +83,58 @@ function fetchAPI(cityParam) {
       currentForecastEl.innerHTML = "";
 
       // create
+      var futureForecastsContainer = document.createElement("div")
+
       var fiveDayForeDay1Card = document.createElement("div")
       var fiveDayForeDay2Card = document.createElement("div")
       var fiveDayForeDay3Card = document.createElement("div")
       var fiveDayForeDay4Card = document.createElement("div")
       var fiveDayForeDay5Card = document.createElement("div")
 
-      var fiveDayForeDay1 = document.createElement("p")
-      var fiveDayForeDay2 = document.createElement("p")
-      var fiveDayForeDay3 = document.createElement("p")
-      var fiveDayForeDay4 = document.createElement("p")
-      var fiveDayForeDay5 = document.createElement("p")
+      var tempDay1 = document.createElement("h6")
+      var tempDay2 = document.createElement("h6")
+      var tempDay3 = document.createElement("h6")
+      var tempDay4 = document.createElement("h6")
+      var tempDay5 = document.createElement("h6")
+
+      var windDay1 = document.createElement("h6")
+      var windDay2 = document.createElement("h6")
+      var windDay3 = document.createElement("h6")
+      var windDay4 = document.createElement("h6")
+      var windDay5 = document.createElement("h6")
 
       var cityNameEl = document.createElement("p");
       var currentTempEl = document.createElement("p");
       var currentWindEl = document.createElement("p");
       var currentHumidityEl = document.createElement("p");
       // modify
-      fiveDayForeDay1.setAttribute("class", "day1");
-      fiveDayForeDay1.textContent = "Temp: " + Math.floor((data.list[0].main.temp - 273.15) * 1.8 + 32) + "°F";
-      // fiveDayForeDay1.textContent = "Wind: " + data.list[0].wind.speed + " MPH";
+      fiveDayForeDay1Card.setAttribute("class", "cards");
+      fiveDayForeDay2Card.setAttribute("class", "cards");
+      fiveDayForeDay3Card.setAttribute("class", "cards");
+      fiveDayForeDay4Card.setAttribute("class", "cards");
+      fiveDayForeDay5Card.setAttribute("class", "cards");
+
+      // windDay1.setAttribute("class", "cards");
+      // windDay2.setAttribute("class", "cards");
+      // windDay3.setAttribute("class", "cards");
+      // windDay4.setAttribute("class", "cards");
+      // windDay5.setAttribute("class", "cards");
+
+
+      tempDay1.textContent = "Temp: " + Math.floor((data.list[7].main.temp - 273.15) * 1.8 + 32) + "°F";
+      tempDay2.textContent = "Temp: " + Math.floor((data.list[15].main.temp - 273.15) * 1.8 + 32) + "°F";
+      tempDay3.textContent = "Temp: " + Math.floor((data.list[23].main.temp - 273.15) * 1.8 + 32) + "°F";
+      tempDay4.textContent = "Temp: " + Math.floor((data.list[31].main.temp - 273.15) * 1.8 + 32) + "°F";
+      tempDay5.textContent = "Temp: " + Math.floor((data.list[39].main.temp - 273.15) * 1.8 + 32) + "°F";
+
+      windDay1.textContent = "Wind: " + data.list[7].wind.speed   + "MPH";
+      windDay2.textContent = "Wind: " + data.list[15].wind.speed  + "MPH";
+      windDay3.textContent = "Wind: " + data.list[23].wind.speed  + "MPH";
+      windDay4.textContent = "Wind: " + data.list[31].wind.speed  + "MPH";
+      windDay5.textContent = "Wind: " + data.list[39].wind.speed  + "MPH";
+
+
+      // tempDay1.textContent = "Wind: " + data.list[0].wind.speed + " MPH";
       cityNameEl.textContent = data.city.name 
       currentTempEl.textContent = "Temp: " + Math.floor((data.list[0].main.temp - 273.15) * 1.8 + 32) + "°F";
       currentWindEl.textContent = "Wind: " + data.list[0].wind.speed + " MPH";
@@ -114,11 +146,11 @@ function fetchAPI(cityParam) {
       cityNameEl.setAttribute("style", "font-size:25px");
       currentTempEl.setAttribute("style", "font-size:25px");
 
-      fiveDayForeDay1.setAttribute("style", "margin-left:265px");
-      fiveDayForeDay2.setAttribute("style", "margin-left:265px");
-      fiveDayForeDay3.setAttribute("style", "margin-left:265px");
-      fiveDayForeDay4.setAttribute("style", "margin-left:265px");
-      fiveDayForeDay5.setAttribute("style", "margin-left:265px");
+      futureForecastsContainer.setAttribute("style", "display:flex");
+      // tempDay2.setAttribute("style", "margin-left:265px");
+      // tempDay3.setAttribute("style", "margin-left:265px");
+      // tempDay4.setAttribute("style", "margin-left:265px");
+      // tempDay5.setAttribute("style", "margin-left:265px");
 
       currentWindEl.setAttribute("style", "font-size:25px");
       currentHumidityEl.setAttribute("style", "font-size:25px");
@@ -129,17 +161,25 @@ function fetchAPI(cityParam) {
       document.body.children[1].children[1].append(iconEl)
       // append
       // searchContainer.appendChild(savedCityEl);
-      document.body.appendChild(fiveDayForeDay1Card);
-      document.body.appendChild(fiveDayForeDay2Card);
-      document.body.appendChild(fiveDayForeDay3Card);
-      document.body.appendChild(fiveDayForeDay4Card);
-      document.body.appendChild(fiveDayForeDay5Card);
 
-      fiveDayForeDay1Card.appendChild(fiveDayForeDay1);
-      fiveDayForeDay2Card.appendChild(fiveDayForeDay2);
-      fiveDayForeDay3Card.appendChild(fiveDayForeDay3);
-      fiveDayForeDay4Card.appendChild(fiveDayForeDay4);
-      fiveDayForeDay5Card.appendChild(fiveDayForeDay5);
+      document.body.appendChild(futureForecastsContainer)
+      futureForecastsContainer.appendChild(fiveDayForeDay1Card);
+      futureForecastsContainer.appendChild(fiveDayForeDay2Card);
+      futureForecastsContainer.appendChild(fiveDayForeDay3Card);
+      futureForecastsContainer.appendChild(fiveDayForeDay4Card);
+      futureForecastsContainer.appendChild(fiveDayForeDay5Card);
+
+      fiveDayForeDay1Card.appendChild(tempDay1);
+      fiveDayForeDay2Card.appendChild(tempDay2);
+      fiveDayForeDay3Card.appendChild(tempDay3);
+      fiveDayForeDay4Card.appendChild(tempDay4);
+      fiveDayForeDay5Card.appendChild(tempDay5);
+
+      fiveDayForeDay1Card.appendChild(windDay1);
+      fiveDayForeDay2Card.appendChild(windDay2);
+      fiveDayForeDay3Card.appendChild(windDay3);
+      fiveDayForeDay4Card.appendChild(windDay4);
+      fiveDayForeDay5Card.appendChild(windDay5);
 
       document.body.children[1].children[1].appendChild(cityNameEl);
       document.body.children[1].children[1].appendChild(currentTempEl);
