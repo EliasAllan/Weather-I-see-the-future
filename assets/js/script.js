@@ -13,7 +13,6 @@ function saveToStorage(name) {
 
 function renderStorage() {
   var cityNameArray = JSON.parse(localStorage.getItem("City Name"));
-  console.log(cityNameArray);
   document.getElementById("history").innerHTML = "";
   for (var i = 0; i < cityNameArray?.length ; i++) {
     var savedCityEl = document.createElement("button");
@@ -23,27 +22,16 @@ function renderStorage() {
   }
 }
 renderStorage();
-// create
-// var currentWeatherEl = document.createElement("div");
 
-// modify
-
-// currentWeatherEl.textContent = city.country;
-
-// append
-
-// document.body.appendChild(currentWeatherEl);
-
-// 338ceedf83a992ffd42dcc24175384c9
-// '+'#city'+'#state'+'#country'+'
-
-// city = '';
-// state = '';
-// country = '';
 
 function getValue(event) {
-  
-  event.preventDefault()
+  var currentForecastEl = document.querySelector("#currentForecast");
+  currentForecastEl.innerHTML = "";
+  var futureForecastEl = document.querySelector("#futureForecast");
+  console.log(futureForecastEl)
+  futureForecastEl.innerHTML = "";
+
+  // event.preventDefault()
   if(event.target.id === "getForecast"){
     var cityName = document.getElementById("city");
     if(!cityName.value){
@@ -55,44 +43,33 @@ function getValue(event) {
   }
   
   fetchAPI(event.target.innerHTML)
-  // futureForecasts.innerHTML = "";
+ 
 }
 
 function fetchAPI(cityParam) {
-  // var stateText = stateCode.value;
-  // var countryText = countryCode.value;
+
   var requestUrl =
     "https://api.openweathermap.org/data/2.5/forecast?q=" +
     cityParam +
     "&appid=338ceedf83a992ffd42dcc24175384c9";
-    // var placeholder = 'https://api.openweathermap.org/data/2.5/forecast?q='+ getPlace(cityText, stateText, countryText) +'&appid=338ceedf83a992ffd42dcc24175384c9';
-    // var requestUrl = 'https://api.openweathermap.org/data/2.5/forecast?q='+ city + ',' + state + ',' + country + '&appid=338ceedf83a992ffd42dcc24175384c9';
-  // var requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city},${state},${country}&appid=338ceedf83a992ffd42dcc24175384c9`;
+  
   fetch(requestUrl)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
-      console.log("Github Repo Issues \n----------");
-      console.log(data);
-      console.log(document.body)
-      console.log(typeof document.body)
+      // console.log("Github Repo Issues \n----------");
+      // console.log(data);
+      // console.log(document.body)
+      // console.log(typeof document.body)
       
       
       for (var i = 0; i < data.length; i++) {
-        // console.log("url: " + data[i].url + " login: " + data[i].user.login)
         console.log(data[i]);
-      }
-      // TODO: Loop through the response
-      // TODO: Console log each issue's URL and each user's login
-      //create
-      var currentForecastEl = document.querySelector("#currentForecast");
-      currentForecastEl.innerHTML = "";
-      var futureForecasts = document.querySelector("#futureForecasts");
-      
-      
+      }     
+
       // create
-      var futureForecastsContainer = document.createElement("div")
+      var futureForecastsContainer = document.querySelector("#futureForecast")
 
       var fiveDayForeDay1Card = document.createElement("div")
       var fiveDayForeDay2Card = document.createElement("div")
@@ -138,20 +115,12 @@ function fetchAPI(cityParam) {
       var currentHumidityEl = document.createElement("p");
       // modify
 
-      futureForecastsContainer.setAttribute("id", "futureForecasts");
+      // futureForecastsContainer.setAttribute("id", "futureForecasts");
       fiveDayForeDay1Card.setAttribute("class", "cards");
       fiveDayForeDay2Card.setAttribute("class", "cards");
       fiveDayForeDay3Card.setAttribute("class", "cards");
       fiveDayForeDay4Card.setAttribute("class", "cards");
       fiveDayForeDay5Card.setAttribute("class", "cards");
-
-      
-      // windDay1.setAttribute("class", "cards");
-      // windDay2.setAttribute("class", "cards");
-      // windDay3.setAttribute("class", "cards");
-      // windDay4.setAttribute("class", "cards");
-      // windDay5.setAttribute("class", "cards");
-
 
       tempDay1.textContent = "Temp: " + Math.floor((data.list[7].main.temp - 273.15) * 1.8 + 32) + "°F";
       tempDay2.textContent = "Temp: " + Math.floor((data.list[15].main.temp - 273.15) * 1.8 + 32) + "°F";
@@ -171,8 +140,6 @@ function fetchAPI(cityParam) {
       humDay4.textContent = "Humidity: " + data.list[31].main.humidity  + " %";
       humDay5.textContent = "Humidity: " + data.list[39].main.humidity  + " %";
 
-
-      // tempDay1.textContent = "Wind: " + data.list[0].wind.speed + " MPH";
       cityNameEl.textContent = data.city.name 
       currentTempEl.textContent = "Temp: " + Math.floor((data.list[0].main.temp - 273.15) * 1.8 + 32) + "°F";
       currentWindEl.textContent = "Wind: " + data.list[0].wind.speed + " MPH";
@@ -202,7 +169,6 @@ function fetchAPI(cityParam) {
       iconElDay4.setAttribute("src", iconLinkDay4)
       iconElDay5.setAttribute("src", iconLinkDay5)
 
-      // console.log(iconEl)
       
       // append
       
@@ -251,7 +217,7 @@ function fetchAPI(cityParam) {
       document.body.children[1].children[1].appendChild(currentHumidityEl);
       
       
-      console.log(currentTempEl, currentWindEl, currentHumidityEl);
+      // console.log(currentTempEl, currentWindEl, currentHumidityEl);
     });
 }
 // getPlace();
