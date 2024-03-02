@@ -25,20 +25,25 @@ renderStorage();
 
 
 function getValue(event) {
+  console.log("click")
   var currentForecastEl = document.querySelector("#currentForecast");
   currentForecastEl.innerHTML = "";
   var futureForecastEl = document.querySelector("#futureForecast");
-  console.log(futureForecastEl)
+  // console.log(futureForecastEl)
   futureForecastEl.innerHTML = "";
 
   // event.preventDefault()
   if(event.target.id === "getForecast"){
-    var cityName = document.getElementById("city");
-    if(!cityName.value){
+    var city = document.getElementById("city");
+    var state = document.getElementById("state");
+    var country = document.getElementById("country");
+    var cityName = city.value+","+state.value+","+country.value
+    console.log(cityName)
+    if(!cityName){
       return
     }
-    fetchAPI(cityName.value)
-    saveToStorage(cityName.value)
+    fetchAPI(cityName)
+    saveToStorage(cityName)
     return
   }
   
