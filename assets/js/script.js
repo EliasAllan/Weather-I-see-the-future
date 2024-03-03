@@ -177,7 +177,7 @@ function fetchAPI(cityParam) {
       
       // append
       
-      document.body.children[1].children[1].append(iconEl)
+      document.body.appendChild(iconEl)
       fiveDayForeDay1Card.appendChild(iconElDay1);
       fiveDayForeDay2Card.appendChild(iconElDay2);
       fiveDayForeDay3Card.appendChild(iconElDay3);
@@ -216,10 +216,10 @@ function fetchAPI(cityParam) {
       fiveDayForeDay4Card.appendChild(humDay4);
       fiveDayForeDay5Card.appendChild(humDay5);
 
-      document.body.children[1].children[1].appendChild(cityNameEl);
-      document.body.children[1].children[1].appendChild(currentTempEl);
-      document.body.children[1].children[1].appendChild(currentWindEl);
-      document.body.children[1].children[1].appendChild(currentHumidityEl);
+      document.body.appendChild(cityNameEl);
+      document.body.appendChild(currentTempEl);
+      document.body.appendChild(currentWindEl);
+      document.body.appendChild(currentHumidityEl);
       
       
       // console.log(currentTempEl, currentWindEl, currentHumidityEl);
